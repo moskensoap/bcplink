@@ -10,7 +10,7 @@ After installing MSYS2 (https://www.msys2.org), run the following command:
 
     pacman -S mingw-w64-ucrt-x86_64-toolchain.
 
-MinGW64 (https://www.mingw-w64.org, https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/, MinGW-W64 GCC-8.1.0).
+Or to download binaries MinGW64 (https://www.mingw-w64.org, https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/, MinGW-W64 GCC-8.1.0).
 
 Once installed, make sure to add the directory containing gcc.exe to your computer's PATH to run gcc.exe from any location. After that, create a directory and run the following command (make sure you have Git installed, https://git-scm.com):
 
