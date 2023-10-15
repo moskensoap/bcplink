@@ -4,7 +4,7 @@ A quick search reveals that each type of Windows shell (Git Bash, PowerShell, CM
 This project starts with Windows but has plans to expand to Linux. Its goal is to provide a global alias creation tool, especially for combined commands, to benefit users across different shell environments.
 
 # How to install
-You need to set up a C language development environment on your local computer. We recommend using the following open-source toolchains:
+You need to set up a c language on your local computer. We recommend using the following open-source toolchains:
 
 After installing MSYS2 (https://www.msys2.org), run the following command:
 
