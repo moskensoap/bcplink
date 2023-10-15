@@ -307,9 +307,8 @@ int CreatBASH(int argc, char *NoOptionsArgv[], char yflag)
     FILE *fpBASH;
     ToLinuxString(NoOptionsArgv, FormatArgv);
     int length_linkname = strlen(FormatArgv[1]);
-    char linkname_dot_sh[length_linkname + 4];
+    char linkname_dot_sh[length_linkname + 1];
     strcpy(linkname_dot_sh, FormatArgv[1]);
-    strcat(linkname_dot_sh, ".sh");
     if (yflag == 0)
     {
         fpBASH = fopen(linkname_dot_sh, "r");

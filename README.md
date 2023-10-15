@@ -63,7 +63,7 @@ __restart.ps1__
     	& "shutdown" "-r" "-t" "0" $args
     }
 
-__restart.sh__
+__restart__
 
     #!/bin/sh
     exec "shutdown" "-r" "-t" "0" "$@"
@@ -93,7 +93,7 @@ __python311.ps1__
     	& "D:\Develop\Python\Python311\python.exe" $args
     }
 
-__python311.sh__
+__python311__
 
     #!/bin/sh
     exec "/d/Develop/Python/Python311/python.exe" "$@"
