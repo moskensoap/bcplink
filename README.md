@@ -72,7 +72,7 @@ You can run the full script name, which will call its respective shell to execut
 
 For example, in Command Prompt, if you run "restart," "restart.cmd" will be executed. If you run "restart.ps1," the script will invoke PowerShell to run silently and return its output.
 
-## edition manegement of python
+## Version control for Python
 
 Running the following command from any location:
 
