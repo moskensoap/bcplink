@@ -69,7 +69,7 @@ int IsThere(char *OptionsArgv[], char *input)
 
 void ShowVersion(void)
 {
-    printf("bcplink version 0.0.1\n");
+    printf("bcplink version 0.0.2\n");
     printf("bcplink is a command-line tool that automatically creates Bash, CMD, and PowerShell script links\n");
     printf("\tto set up command aliases for running target scripts or programs.\n");
     printf("To see detailed instructions and examples, run <bcplink -h>\n");
@@ -198,6 +198,19 @@ void ToLinuxString(char *NoOptionsArgv[], char *FormatArgv[])
         i++;
     }
     FormatArgv[i] = NoOptionsArgv[i];
+
+    for (int j = 0; FormatArgv[1][j] != 0; j++)
+    {
+        if (FormatArgv[1][j] == '/')
+        {
+            FormatArgv[1][j] = '\\';
+        }
+    }
+    if (strlen(FormatArgv[1]) >= 2 && FormatArgv[1][0] == '\\' && FormatArgv[1][2] == '\\')
+    {
+        FormatArgv[1][0] = toupper(FormatArgv[1][1]);
+        FormatArgv[1][1] = ':';
+    }
 }
 
 int CreatCMD(int argc, char *NoOptionsArgv[], char yflag)
