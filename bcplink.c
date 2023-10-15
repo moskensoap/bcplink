@@ -69,7 +69,7 @@ int IsThere(char *OptionsArgv[], char *input)
 
 void ShowVersion(void)
 {
-    printf("bcplink version 0.0.2\n");
+    printf("bcplink version 0.1.1\n");
     printf("bcplink is a command-line tool that automatically creates Bash, CMD, and PowerShell script links\n");
     printf("\tto set up command aliases for running target scripts or programs.\n");
     printf("To see detailed instructions and examples, run <bcplink -h>\n");
@@ -307,22 +307,22 @@ int CreatBASH(int argc, char *NoOptionsArgv[], char yflag)
     FILE *fpBASH;
     ToLinuxString(NoOptionsArgv, FormatArgv);
     int length_linkname = strlen(FormatArgv[1]);
-    char linkname_dot_sh[length_linkname + 1];
-    strcpy(linkname_dot_sh, FormatArgv[1]);
+    char linkname[length_linkname + 1];
+    strcpy(linkname, FormatArgv[1]);
     if (yflag == 0)
     {
-        fpBASH = fopen(linkname_dot_sh, "r");
+        fpBASH = fopen(linkname, "r");
         if (fpBASH != NULL)
         {
             fclose(fpBASH);
-            printf("warning: %s exists, use -y to overwrite.\n", linkname_dot_sh);
+            printf("warning: %s exists, use -y to overwrite.\n", linkname);
             return 100;
         }
     }
-    fpBASH = fopen(linkname_dot_sh, "w");
+    fpBASH = fopen(linkname, "w");
     if (fpBASH == NULL)
     {
-        printf("warning: cannot open %s for writing.\n", linkname_dot_sh);
+        printf("warning: cannot open %s for writing.\n", linkname);
         return 200;
     }
     fprintf(fpBASH, "#!/bin/sh\n");
