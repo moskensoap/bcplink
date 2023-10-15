@@ -12,7 +12,7 @@ After installing MSYS2 (https://www.msys2.org), run the following command:
 
 MinGW64 (https://www.mingw-w64.org, https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/, MinGW-W64 GCC-8.1.0).
 
-Once installed, make sure to add the directory containing gcc.exe to your computer's PATH environment variable to run gcc.exe from any location. After that, create a directory and run the following command (make sure you have Git installed, https://git-scm.com):
+Once installed, make sure to add the directory containing gcc.exe to your computer's PATH to run gcc.exe from any location. After that, create a directory and run the following command (make sure you have Git installed, https://git-scm.com):
 
     git clone https://github.com/moskensoap/bcplink.git
 
@@ -20,7 +20,7 @@ Alternatively, you can copy the bcplink.c code from this repository to your loca
 
     gcc bcplink.c -o bcplink.exe
 
-Move the generated bcplink.exe to a directory included in your PATH environment variable. After completing these steps, you can run bcplink from any location. Installation is now complete.
+Move the generated bcplink.exe to a directory included in your PATH. After completing these steps, you can run bcplink from any location. Installation is now complete.
 
 
 # Command-line Usage
