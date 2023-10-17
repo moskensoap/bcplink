@@ -6,11 +6,14 @@ This project starts with Windows but has plans to expand to Linux. Its goal is t
 # How to install
 You need to set up a c language on your local computer. We recommend using the following open-source toolchains:
 
-After installing MSYS2 (https://www.msys2.org), run the following command:
+MSYS2 (https://www.msys2.org): After installing MSYS2, execute the following command:
 
     pacman -S mingw-w64-ucrt-x86_64-toolchain.
+Alternatively, you can use a smaller standalone compiler:
 
-Or to download binaries MinGW64 (https://www.mingw-w64.org, https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/, MinGW-W64 GCC-8.1.0).
+    pacman -S ucrt64/mingw-w64-ucrt-x86_64-gcc
+
+If you prefer, you can download the binaries for MinGW64 from MinGW-w64(https://www.mingw-w64.org) or SourceForge(https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release). We recommend using MinGW-W64 GCC-8.1.0.
 
 Once installed, make sure to add the directory containing gcc.exe to your computer's PATH to run gcc.exe from any location. After that, create a directory and run the following command (make sure you have Git installed, https://git-scm.com):
 
@@ -20,7 +23,7 @@ Alternatively, you can copy the bcplink.c code from this repository to your loca
 
     gcc bcplink.c -o bcplink.exe
 
-Move the generated bcplink.exe to a directory included in your PATH. After completing these steps, you can run bcplink from any location. Installation is now complete.
+Move the generated bcplink.exe to a directory included in your PATH. After completing these steps, you can run bcplink anywhere. 
 
 
 # Command-line Usage
@@ -47,7 +50,7 @@ This project was originally inspired by npm, bundled with node.js, which automat
 if you are in the directory "D:/code/cmd" and run
 
     bcplink restart shutdown -r -t 0
-You will get three scripts:
+Three scripts will be created in current directory.
 
 __restart.cmd__
 
@@ -97,6 +100,18 @@ __python311__
 
     #!/bin/sh
     exec "/d/Develop/Python/Python311/python.exe" "$@"
+
+## Other usefull link
+### Create a Link to Show Git History in the Command Line
+    bcplink git-log git log --pretty=oneline --all --graph --abbrev-commit
+
+### Create a Link from "mingw32-make" to "make"
+    bcplink make mingw32-make
+
+### Run Lua with the CODE RUNNER Extension Without Setting in VS Code 
+    bcplink lua lua54
+    bcplink luac luac54
+    bcplink wlua wlua54
 
 # Acknowledgements and Bug Reporting
 Special Thanks to the VS Code(https://code.visualstudio.com) for supporting the development of this project. We are also eager to assist with any bug reports and issues submitted by the community. Your feedback is invaluable in making this project better.
