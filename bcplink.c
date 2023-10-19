@@ -69,7 +69,7 @@ int IsThere(char *OptionsArgv[], char *input)
 
 void ShowVersion(void)
 {
-    printf("bcplink version 0.1.1\n");
+    printf("bcplink version 0.1.2\n");
     printf("bcplink is a command-line tool that automatically creates Bash, CMD, and PowerShell script links\n");
     printf("\tto set up command aliases for running target scripts or programs.\n");
     printf("To see detailed instructions and examples, run <bcplink -h>\n");
@@ -242,7 +242,7 @@ int CreatCMD(int argc, char *NoOptionsArgv[], char yflag)
     for (int i = 2; FormatArgv[i] != 0; i++)
     {
         fprintf(fpCMD, "\"");
-        fprintf(fpCMD, FormatArgv[i]);
+        fprintf(fpCMD, "%s",FormatArgv[i]);
         fprintf(fpCMD, "\" ");
     }
     fprintf(fpCMD, "%%*");
@@ -275,14 +275,14 @@ int CreatPS1(int argc, char *NoOptionsArgv[], char yflag)
         printf("warning: cannot open %s for writing.\n", linkname_dot_ps1);
         return 20;
     }
-    fprintf(fpPS1, "\t# Support pipeline input\n");
+    fprintf(fpPS1, "# Support pipeline input\n");
 
     fprintf(fpPS1, "if ($MyInvocation.ExpectingInput) {\n");
     fprintf(fpPS1, "\t$input | & ");
     for (int i = 2; FormatArgv[i] != 0; i++)
     {
         fprintf(fpPS1, "\"");
-        fprintf(fpPS1, FormatArgv[i]);
+        fprintf(fpPS1, "%s",FormatArgv[i]);
         fprintf(fpPS1, "\" ");
     }
     fprintf(fpPS1, "$args\n");
@@ -291,7 +291,7 @@ int CreatPS1(int argc, char *NoOptionsArgv[], char yflag)
     for (int i = 2; FormatArgv[i] != 0; i++)
     {
         fprintf(fpPS1, "\"");
-        fprintf(fpPS1, FormatArgv[i]);
+        fprintf(fpPS1, "%s",FormatArgv[i]);
         fprintf(fpPS1, "\" ");
     }
     fprintf(fpPS1, "$args\n");
@@ -331,7 +331,7 @@ int CreatBASH(int argc, char *NoOptionsArgv[], char yflag)
     for (int i = 2; FormatArgv[i] != 0; i++)
     {
         fprintf(fpBASH, "\"");
-        fprintf(fpBASH, FormatArgv[i]);
+        fprintf(fpBASH, "%s",FormatArgv[i]);
         fprintf(fpBASH, "\" ");
     }
     fprintf(fpBASH, "\"$@\"");
