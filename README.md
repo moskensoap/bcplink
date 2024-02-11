@@ -1,63 +1,84 @@
 # Motivation
-A quick search reveals that each type of Windows shell (Git Bash, PowerShell, CMD) offers its own methods for setting local aliases. However, there is a lack of a global alias management tool, and creating aliases for combined commands is not supported.
+This project aims to provide a alias creating tool in Windows for MSYS2 or GitBash users, to offer common alias across different shell enviroments.
 
-This project starts with Windows but has plans to expand to Linux. Its goal is to provide a global alias creation tool, especially for combined commands, to benefit users across different shell environments.
 
 # How to install
-You need to set up a c language on your local computer. We recommend using the following open-source toolchains:
+1.Install MSYS2 form https://www.msys2.org:
 
-MSYS2 (https://www.msys2.org): After installing MSYS2, execute the following command:
+2.After installing MSYS2, execute the following command:
 
     pacman -S mingw-w64-ucrt-x86_64-toolchain.
 Alternatively, you can use a smaller standalone compiler:
 
     pacman -S ucrt64/mingw-w64-ucrt-x86_64-gcc
 
-If you prefer, you can download the binaries for MinGW64 from MinGW-w64(https://www.mingw-w64.org) or SourceForge(https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release). We recommend using MinGW-W64 GCC-8.1.0.
+If you prefer, you can download the binaries for MinGW64 from MinGW-w64(https://www.mingw-w64.org) or SourceForge(https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release). MinGW-W64 GCC-8.1.0 is recommended.
 
-Once installed, make sure to add the directory containing gcc.exe to your computer's PATH to run gcc.exe from any location. After that, create a directory and run the following command (make sure you have Git installed, https://git-scm.com):
+3.Ensure that the directory containing gcc.exe is added to your computer's PATH to run gcc.exe from any location.
 
+4.Install git with MSYS2:
+
+    pacman -S msys/git
+
+or install git from https://git-scm.com without MSYS2. 
+
+5.create a directory (e.g., D:/code/github is recommended) and run the following command in CMD: 
+
+    D:
+    cd D:/code/github
     git clone https://github.com/moskensoap/bcplink.git
-
-Alternatively, you can copy the bcplink.c code from this repository to your local files. Compile it using the following command:
-
+    cd bcplink
     gcc bcplink.c -o bcplink.exe
 
-Move the generated bcplink.exe to a directory included in your PATH. After completing these steps, you can run bcplink anywhere. 
+You can use optional paramater with gcc to optimize as follow:
+
+    -Os     Optimize for size
+    -O3     optimize for speed
+    -s      Strip symbol information to reduce the size. 
+
+Move the generated bcplink.exe to a directory included in your PATH. (e.g., D:/code/cmd is recommended).
 
 
 # Command-line Usage
 
-    bcplink [options] linkname TargetName [TargetParameters]
+    Usage: bcplink [options] Alias Command [CommandParameters]
 ### Options:
 
-        -v,--v,-version,--version       Display version info.
-        -h,--h,-help,--help             Display this help message.
-        -bash,-cmd,-ps1                 Manually choose the type of script to create.
-        -y,-Y,-yes,-f,-F,-force         Force overwrite of existing scripts.
+        -v, --v, -version, --version    Display version info.
+        -h, --h, -help, --help          Display this help message.
+        -bash, -cmd, -ps1               Manually choose the type of script to create.
+        -y, -Y, -yes, -f, -F, -force    Force overwrite of existing scripts.
 ### Arguments:
-        linkname                The name of the links to be created: linkname.cmd linkname.ps1 linkname(for Git Bash).
-        TargetName              The name of the target script or program to be linked.
-        TargetParameters        Optional parameters to be passed to the target script or program.
+        Alias                   The name of the Alias files to be created: Alias.cmd Alias.ps1 Alias(for Bash).
+        Command                 The Alias files will run the Command
+        CommandParameters       Optional parameters of the Command.
 
 # Inspiration
 
 This project was originally inspired by npm, bundled with node.js, which automatically creates scripts to run its packages.
 
-
 # Examples
-## restart script
-if you are in the directory "D:/code/cmd" and run
+## reboot script
+To create a reboot script, navigate to the directory included in your PATH where you want to store the scripts (e.g., D:/code/cmd), to run:
 
-    bcplink restart shutdown -r -t 0
+    #CMD
+    D:
+    cd D:/code/cmd
+    #Powershell
+    cd D:/code/cmd
+    #bash
+    cd /d/code/cmd
+ and run:
+
+    bcplink reboot shutdown -r -t 0
 Three scripts will be created in current directory.
 
-__restart.cmd__
+__reboot.cmd__
 
     @ECHO off
     "shutdown" "-r" "-t" "0" %*
 
-__restart.ps1__
+__reboot.ps1__
 
     	# Support pipeline input
     if ($MyInvocation.ExpectingInput) {
@@ -66,21 +87,22 @@ __restart.ps1__
     	& "shutdown" "-r" "-t" "0" $args
     }
 
-__restart__
+__reboot__
 
     #!/bin/sh
     exec "shutdown" "-r" "-t" "0" "$@"
 
-You can run the full script name, which will call its respective shell to execute. When you run just "restart," the shell will automatically choose the appropriate script to run.
+Using:
 
-For example, in Command Prompt, if you run "restart," "restart.cmd" will be executed. If you run "restart.ps1," the script will invoke PowerShell to run silently and return its output.
+    reboot
+It will automatically call 'reboot.cmd' in CMD, call 'reboot.ps1' in PowerShell, call 'reboot' in Bash.
 
 ## Version control for Python
 
 Running the following command from any location:
 
     bcplink "D:/code/cmd/python311" "D:\Develop\Python\Python311\python.exe"
-will generate three scripts in the 'D:/code/cmd' directory.
+will generate three scripts in 'D:/code/cmd' directory.
 
 __python311.cmd__
 
@@ -102,6 +124,14 @@ __python311__
     exec "/d/Develop/Python/Python311/python.exe" "$@"
 
 ## Other usefull link
+    #CMD
+    D:
+    cd D:/code/cmd
+    #Powershell
+    cd D:/code/cmd
+    #bash
+    cd /d/code/cmd
+and run:
 ### Create a Link to Show Git History in the Command Line
     bcplink git-log git log --pretty=oneline --all --graph --abbrev-commit
 
@@ -113,5 +143,26 @@ __python311__
     bcplink luac luac54
     bcplink wlua wlua54
 
+### make ls.exe alias like in ubuntu after adding msys64/usr/bin to PATH.
+    bcplink lc ls.exe --color=auto
+    bcplink lf ls.exe --color=auto -F
+    bcplink l ls.exe --color=auto -lh
+    bcplink ll ls.exe --color=auto -lah
+    bcplink la ls.exe --color=auto -A
+    bcplink lm ls.exe --color=auto -m
+    bcplink lr ls.exe --color=auto -R
+    bcplink lg ls.exe --color=auto -l --group-directories-first
+### make grep.exe alias like in ubuntu after adding msys64/usr/bin to PATH.
+    bcplink grepc grep.exe --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}
+    bcplink grepe grep.exe -E --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}
+    bcplink grepf grep.exe -F --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}
+### make diff.exe alias like in ubuntu after adding msys64/usr/bin to PATH.  
+    bcplink diffc diff.exe --color
+### nodejs version control
+    bcplink node20 D:\Develop\Nodejs\node-v20.9.0-win-x64\node
+    bcplink node18 D:\Develop\Nodejs\node-v18.17.1-win-x64\node.exe
+    bcplink npm20 D:\Develop\Nodejs\node-v20.9.0-win-x64\npm
+    bcplink npm18 D:\Develop\Nodejs\node-v18.17.1-win-x64\npm
+
 # Acknowledgements and Bug Reporting
-Special Thanks to the VS Code(https://code.visualstudio.com) for supporting the development of this project. We are also eager to assist with any bug reports and issues submitted by the community. Your feedback is invaluable in making this project better.
+Special Thanks to VS Code (https://code.visualstudio.com). If you have any suggestions or bug reports, don't hesitate to report them. Your feedback is invaluable in making this project better.
