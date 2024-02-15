@@ -5,7 +5,7 @@ This project aims to provide a alias creating tool in Windows for MSYS2 or GitBa
 # How to install
 1.Install MSYS2 form https://www.msys2.org:
 
-2.After installing MSYS2, execute the following command:
+After installing MSYS2, execute the following command:
 
     pacman -S mingw-w64-ucrt-x86_64-toolchain.
 Alternatively, you can use a smaller standalone compiler:
@@ -14,15 +14,15 @@ Alternatively, you can use a smaller standalone compiler:
 
 If you prefer, you can download the binaries for MinGW64 from MinGW-w64(https://www.mingw-w64.org) or SourceForge(https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release). MinGW-W64 GCC-8.1.0 is recommended.
 
-3.Ensure that the directory containing gcc.exe is added to your computer's PATH to run gcc.exe from any location.
+2.Ensure that the directory containing gcc.exe is added to your computer's PATH to run gcc.exe from any location.
 
-4.Install git with MSYS2:
+3.Install git with MSYS2:
 
     pacman -S msys/git
 
 or install git from https://git-scm.com without MSYS2. 
 
-5.create a directory (e.g., D:/code/github is recommended) and run the following command in CMD: 
+4.create a directory (e.g., D:/code/github is recommended) and run the following command in CMD: 
 
     D:
     cd D:/code/github
@@ -36,7 +36,7 @@ You can use optional paramater with gcc to optimize as follow:
     -O3     optimize for speed
     -s      Strip symbol information to reduce the size. 
 
-Move the generated bcplink.exe to a directory included in your PATH. (e.g., D:/code/cmd is recommended).
+5.Move the generated bcplink.exe to a directory included in your PATH. (e.g., D:/code/cmd is recommended).
 
 
 # Command-line Usage
