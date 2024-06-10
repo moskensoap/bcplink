@@ -336,9 +336,9 @@ int CreatBASH(int argc, char *NoOptionsArgv[], char yflag)
 
 int main(int argc, char *argv[])
 {
-    char flag, yflag;
+    char flag=0, yflag=0;
     char *OptionsArgv[argc], *NoOptionsArgv[argc];
-    int NoOptionsLength;
+    int NoOptionsLength=0;
 
     NoOptionsLength = SeparateOptions(argv, OptionsArgv, NoOptionsArgv);
 
